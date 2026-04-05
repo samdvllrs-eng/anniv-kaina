@@ -9,38 +9,39 @@ def get_base64(bin_file):
     return base64.b64encode(data).decode()
 
 def set_background(png_file):
-    try:
-        bin_str = get_base64(png_file)
-        page_bg_img = '''
-        <style>
-        .stApp {
-            background-image: url("data:image/png;base64,%s");
-            background-size: cover;
-            background-position: center 35%%;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-        }
+    bin_str = get_base64(png_file)
+    page_bg_img = '''
+    <style>
+    .stApp {
+        background-image: url("data:image/png;base64,%s");
+        background-size: cover;
 
-        .stHeader, .stRadio, .stButton, div[data-testid="stText"], .stSuccess, .stError {
-            background-color: rgba(255, 245, 247, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 10px;
-        }
+        /* ON UTILISE %% POUR QUE PYTHON NE FASSE PAS D'ERREUR */
+        background-position: center 35%%;
 
-        .gift-card {
-            background: linear-gradient(135deg, #fff5f7 0%%, #ffd1dc 100%%);
-            padding: 30px;
-            border-radius: 20px;
-            border: 2px dashed #ff4b4b;
-            color: #333;
-        }
-        </style>
-        ''' % bin_str
-        st.markdown(page_bg_img, unsafe_allow_html=True)
-    except:
-        st.warning("Image de fond introuvable. Vérifie le dossier 'image/'.")
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+    }
+
+    /* On applique le fond SEULEMENT aux vrais blocs de contenu */
+    .stHeader, .stRadio, .stButton, div[data-testid="stText"], .stSuccess, .stError {
+        background-color: rgba(255, 245, 247, 0.9);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        margin-bottom: 10px;
+    }
+
+    .gift-card {
+        background: linear-gradient(135deg, #fff5f7 0%%, #ffd1dc 100%%);
+        padding: 30px;
+        border-radius: 20px;
+        border: 2px dashed #ff4b4b;
+        color: #333;
+    }
+    </style>
+    ''' % bin_str
+    st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # 1. Configuration
 st.set_page_config(page_title="Joyeux Anniversaire Kaina ! 🎂", page_icon="💖", layout="centered")
@@ -73,11 +74,9 @@ st.write("Kakoukakou ! J'ai voulu faire quelque chose d'un peu spécial pour tes
 st.header("📸 Nos meilleurs moments")
 col_a, col_b = st.columns(2)
 with col_a:
-    try: st.image("image/photo1.jpg", caption="Là où tout a commencé")
-    except: st.write("📷 Photo 1 manquante")
+    st.image("image/photo1.jpg", caption="Là où tout a commencé")
 with col_b:
-    try: st.image("image/photo2.jpg", caption="Toi et moi, pour toujours")
-    except: st.write("📷 Photo 2 manquante")
+    st.image("image/photo2.jpg", caption="Toi et moi, pour toujours")
 
 # 7. SECTION JEU
 st.header("🎁 Le Quiz de l'Amour")
@@ -98,11 +97,13 @@ elif st.session_state.etape == 2:
     reponse = st.radio("Quel jour de la semaine nos chemins se sont-ils croisés pour la première fois ?", ["Lundi", "Jeudi", "Samedi", "Dimanche"], key="q1")
     if st.button("Valider la réponse"):
         if reponse == "Samedi":
+            st.image("image/bravo.jpg", width=500)
             st.success("Bravo ! Un samedi qu'on n'oubliera jamais. ❤️")
             time.sleep(2)
             st.session_state.etape = 2.1
             st.rerun()
         else:
+            st.image("image/perdu.jpg", width=250)
             st.error("Nop ! Réessaie mon cœur.")
 
 # --- QUESTION 2 : Prénom bébé ---
@@ -111,24 +112,28 @@ elif st.session_state.etape == 2.1:
     reponse = st.radio("Si le destin nous offre une petite fille, quel est le prénom que je rêve de lui donner ?", ["Lina", "Sana", "Maya", "Inès"], key="q2")
     if st.button("Valider la réponse"):
         if reponse == "Sana":
+            st.image("image/bravo.jpg", width=500)
             st.success("Exactement ! Sana, comme une évidence. ✨")
             time.sleep(2)
             st.session_state.etape = 2.2
             st.rerun()
         else:
+            st.image("image/perdu.jpg", width=250)
             st.error("Ce n'est pas celui-là... concentre-toi !")
 
 # --- QUESTION 3 : DC ---
 elif st.session_state.etape == 2.2:
     st.subheader("🧐 Question 3 / 6")
-    reponse = st.radio("Quel est mon record actuel au développé couché ?", ["100kg", "110kg", "115kg", "120kg"], key="q3")
+    reponse = st.radio("Quel est mon record actuel au développé couché (ton homme est costaud ou pas ?) ?", ["100kg", "110kg", "115kg", "120kg"], key="q3")
     if st.button("Valider la réponse"):
         if reponse == "115kg":
+            st.image("image/bravo.jpg", width=500)
             st.success("Et oui ! 115kg de pur amour (et de muscles) ! 💪")
             time.sleep(2)
             st.session_state.etape = 2.3
             st.rerun()
         else:
+            st.image("image/perdu.jpg", width=250)
             st.error("Tu me sous-estimes ! Réessaie haha.")
 
 # --- QUESTION 4 : Pays ---
@@ -137,11 +142,13 @@ elif st.session_state.etape == 2.3:
     reponse = st.radio("Quel est le tout premier pays que je veux qu'on aille explorer en amoureux ?", ["La Grèce", "La Sicile", "Le Portugal", "L'Islande"], key="q4")
     if st.button("Valider la réponse"):
         if reponse == "La Sicile":
+            st.image("image/bravo.jpg", width=500)
             st.success("La Sicile... ça va être incroyable avec toi. 🇮🇹")
             time.sleep(2)
             st.session_state.etape = 2.4
             st.rerun()
         else:
+            st.image("image/perdu.jpg", width=250)
             st.error("Ce n'est pas ma priorité actuelle !")
 
 # --- QUESTION 5 : Habiter ---
@@ -150,11 +157,13 @@ elif st.session_state.etape == 2.4:
     reponse = st.radio("Dans quel endroit de rêve est-ce que je nous vois habiter plus tard ?", ["Marseille centre", "Cassis", "Carry-le-Rouet", "Saulce"], key="q5")
     if st.button("Valider la réponse"):
         if reponse == "Carry-le-Rouet":
+            st.image("image/bravo.jpg", width=500)
             st.success("La mer, le calme et nous... le paradis à Carry. 🌊")
             time.sleep(2)
             st.session_state.etape = 2.5
             st.rerun()
         else:
+            st.image("image/perdu.jpg", width=250)
             st.error("C'est pas assez beau pour nous ça !")
 
 # --- QUESTION 6 : La plus belle ---
@@ -163,11 +172,13 @@ elif st.session_state.etape == 2.5:
     reponse = st.radio("Dis-moi... qui est la femme la plus belle, la plus incroyable et la seule reine de mon cœur ?", ["Une actrice connue", "Kaina (Moi)", "Ma voisine"], key="q6")
     if st.button("Valider la réponse finale"):
         if reponse == "Kaina (Moi)":
+            st.image("image/bravo.jpg", width=500)
             st.success("OUI ! C'est toi et personne d'autre. ❤️")
             time.sleep(2)
             st.session_state.etape = 3
             st.rerun()
         else:
+            st.image("image/perdu.jpg", width=250)
             st.error("Tu rigoles j'espère ? Réessaie !")
 
 # --- ÉTAPE 3 : Promesse ---
@@ -188,20 +199,19 @@ elif st.session_state.etape == 4:
             <h2 style="text-align: center; color: #ff4b4b;">🎫 BON POUR UNE VIE DE PRIVILÈGES</h2>
             <p style="text-align: center; font-style: italic;">Valable à n'importe quel instant, sans date d'expiration.</p>
             <hr>
-            <p>Mon bb, en réussissant ce test, tu débloques l'accès illimité à mes services :</p>
+            <p>Mon bb, en réussissant ce test, tu débloques l'accès illimité à mes services. Tu peux me réclamer ces choses quand tu veux :</p>
             <ul style="font-size: 18px; line-height: 1.6;">
-                <li>😋 <b>Service royal de 30 minutes</b> (ou plus ...)</li>
+                <li>😋 <b>Je te dévore la chatte pendant 30 minutes</b> (ou plus ...)</li>
                 <li>💆 <b>Un massage intégral de 20 minutes</b> par moi.</li>
-                <li>💋 <b>Un pack de 10 bisous</b> tendres ou sauvages.</li>
-                <li>☁️ <b>Une séance de papouilles de 15 minutes</b> pour s'endormir.</li>
-                <li>✨ <b>Une soirée où je te fais ce que tu veux.</b></li>
+                <li>💋 <b>Un pack de 10 bisous</b> tendres (ou sauvages grrr) à utiliser de suite.</li>
+                <li>☁️ <b>Une séance de papouilles de 15 minutes</b> pour t'endormir comme un gros bb.</li>
+                <li>✨ <b>Une soirée où je te fais ce que tu veux </b> (tu peux décider que je fasse ce que je veux de toi aussi.)</li>
             </ul>
             <p style="text-align: center; font-weight: bold; margin-top: 20px;">JE T'AIME À LA FOLIE ❤️</p>
         </div>
     """, unsafe_allow_html=True)
 
-    try: st.image("image/photo3.jpg", caption="Ton cadeau final, c'est nous.")
-    except: st.write("📷 Photo finale manquante")
+    st.image("image/photo3.jpg", caption="Ton cadeau final, c'est nous.")
 
     if st.button("Recommencer le quiz"):
         st.session_state.etape = 1
