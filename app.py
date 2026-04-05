@@ -207,15 +207,16 @@ elif st.session_state.etape == 4:
     st.balloons()
     st.snow()
 
-    # --- LANCEMENT DE LA MUSIQUE (on garde la version ID unique) ---
+    # --- LANCEMENT DE LA MUSIQUE ---
     try:
+        # Assure-toi d'avoir un fichier "musique.mp3" dans ton dossier "image"
         play_audio("image/musique.mp3") 
     except:
         pass 
 
     st.success("🌟 FÉLICITATIONS MON BB ! TU AS GAGNÉ ! 🌟")
 
-    # --- CSS AVANCÉ POUR LA CARTE POP-UP RÉALISTE ---
+    # --- CSS CORRIGÉ (%%) POUR LA CARTE POP-UP RÉALISTE ---
     # Nous reproduisons la structure de image_0.png
     st.markdown("""
         <style>
@@ -239,8 +240,8 @@ elif st.session_state.etape == 4:
 
         /* L'animation mime l'ouverture d'un livre */
         @keyframes openRealisticCard {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(-15deg) rotateX(10deg); } /* Inclinaison pour voir l'intérieur */
+            0%% { transform: rotateY(0deg); }
+            100%% { transform: rotateY(-15deg) rotateX(10deg); } /* Inclinaison pour voir l'intérieur */
         }
 
         /* --- FACE AVANT (Le dos rouge de la carte fermée) --- */
@@ -313,8 +314,8 @@ elif st.session_state.etape == 4:
         }
 
         @keyframes popUpEffect {
-            0% { transform: scaleY(0) translateY(100px); opacity: 0; }
-            100% { transform: scaleY(1) translateY(0); opacity: 1; }
+            0%% { transform: scaleY(0) translateY(100px); opacity: 0; }
+            100%% { transform: scaleY(1) translateY(0); opacity: 1; }
         }
 
         /* Liste de tes privilèges, stylisée */
@@ -385,5 +386,7 @@ elif st.session_state.etape == 4:
     st.image("image/photo3.jpg", caption="Ton cadeau final, c'est nous.")
 
     if st.button("Recommencer le quiz"):
-        st.session_state.etape = 1
+        # On réinitialise tout, même la musique
+        for key in st.session_state.keys():
+            del st.session_state[key]
         st.rerun()
