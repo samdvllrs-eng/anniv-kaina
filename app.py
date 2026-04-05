@@ -203,190 +203,117 @@ elif st.session_state.etape == 3:
 # --- LE FINAL (ÉTAPE 4) ---
 # --- LE FINAL (ÉTAPE 4) ---
 elif st.session_state.etape == 4:
-    # On garde les animations Streamlit, c'est festif
     st.balloons()
     st.snow()
 
-    # --- LANCEMENT DE LA MUSIQUE ---
+    # --- MUSIQUE ---
     try:
-        # Assure-toi d'avoir un fichier "musique.mp3" dans ton dossier "image"
         play_audio("image/musique.mp3") 
     except:
         pass 
 
     st.success("🌟 FÉLICITATIONS MON BB ! TU AS GAGNÉ ! 🌟")
 
-    # --- CSS CORRIGÉ (%%) POUR LA CARTE POP-UP RÉALISTE ---
-    # Nous reproduisons la structure de image_0.png
-    st.markdown("""
-        <style>
-        .pop-up-container {
-            perspective: 2000px; /* Force l'effet 3D */
-            display: flex;
-            justify-content: center;
-            margin-top: 50px;
-            height: 600px; /* Espace pour la carte ouverte */
-        }
-
-        .card {
-            width: 500px;
-            height: 350px;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: openRealisticCard 3s forwards; /* Animation d'ouverture auto réaliste */
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border-radius: 10px;
-        }
-
-        /* L'animation mime l'ouverture d'un livre */
-        @keyframes openRealisticCard {
-            0%% { transform: rotateY(0deg); }
-            100%% { transform: rotateY(-15deg) rotateX(10deg); } /* Inclinaison pour voir l'intérieur */
-        }
-
-        /* --- FACE AVANT (Le dos rouge de la carte fermée) --- */
-        .card-front {
-            position: absolute;
-            width: 100%%;
-            height: 100%%;
-            background-color: #d32f2f; /* Rouge vif comme dans image_0.png */
-            border-radius: 10px;
-            backface-visibility: hidden; /* Cacher quand ouvert */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            z-index: 2;
-        }
-
-        /* Petit gâteau sur le dos rouge */
-        .card-front-cake {
-            font-size: 50px;
-            margin-bottom: 20px;
-        }
-
-        .card-front-title {
-            font-size: 30px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* --- FACE INTÉRIEURE (L'intérieur blanc avec le pop-up) --- */
-        .card-inside {
-            position: absolute;
-            width: 100%%;
-            height: 100%%;
-            background-color: #fff8e1; /* Blanc cassé/crème comme dans image_0.png */
-            border-radius: 10px;
-            backface-visibility: hidden;
-            transform: rotateY(180deg); /* Pour être à l'intérieur */
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            z-index: 1;
-            /* Petits dessins de fruits en fond, comme sur ton image */
-            background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><text x="5" y="20" font-size="20">🍓</text><text x="15" y="25" font-size="15">🍇</text></svg>'),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><text x="5" y="20" font-size="20">🍓</text><text x="15" y="25" font-size="15">🍇</text></svg>');
-            background-position: top right, bottom left;
-            background-repeat: no-repeat;
-        }
-
-        /* --- LE POP-UP LUI-MÊME (Ton Bon de Privilèges) --- */
-        .gift-pop-up {
-            background-color: white;
-            border: 2px solid #ffb1c1;
-            border-radius: 10px;
-            padding: 15px;
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            right: 40px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            /* C'est cet effet qui donne l'impression de "découpe" */
-            transform-origin: bottom center;
-            animation: popUpEffect 1s forwards;
-            animation-delay: 2.5s; /* Attend que la carte soit presque ouverte */
-            opacity: 0;
-            backface-visibility: visible;
-        }
-
-        @keyframes popUpEffect {
-            0%% { transform: scaleY(0) translateY(100px); opacity: 0; }
-            100%% { transform: scaleY(1) translateY(0); opacity: 1; }
-        }
-
-        /* Liste de tes privilèges, stylisée */
-        .privilege-list {
-            font-size: 15px;
-            line-height: 1.4;
-            text-align: left;
-            list-style-type: '💖 ';
-            color: #d32f2f; /* Texte rouge */
-            margin-top: 10px;
-        }
-        
-        .privilege-list b {
-            color: black;
-        }
-
-        /* La zone blanche en bas pour ton mot de la fin, comme sur image_0.png */
-        .card-inside-note {
-            background-color: white;
-            border: 1px solid #ddd;
-            height: 100px;
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 20px;
-            color: #ff4b4b;
-        }
-        </style>
-
-        <div class="pop-up-container">
-            <div class="card">
-                <div class="card-front">
-                    <div class="card-front-cake">🎂</div>
-                    <div class="card-front-title">Joyeux Anniversaire</div>
-                </div>
-
-                <div class="card-inside">
-                    <div class="card-inside-note">JE T'AIME À LA FOLIE ❤️</div>
-
-                    <div class="gift-pop-up">
-                        <h2 style="color: #ff4b4b; text-align: center; margin-bottom: 5px; font-size: 20px;">
-                            🎫 BON POUR UNE VIE DE PRIVILÈGES
-                        </h2>
-                        <p style="font-style: italic; font-size: 12px; text-align: center; color: #777;">
-                            Valable à n'importe quel instant.
-                        </p>
-                        <ul class="privilege-list">
-                            <li><b>Cunnilingus Royal</b> (30 min+)</li>
-                            <li><b>Massage Intégral</b> (20 min)</li>
-                            <li><b>Pack 10 Bisous</b></li>
-                            <li><b>Séance Papouilles</b> (mode dodo)</li>
-                            <li><b>Soirée "C'est toi la chef"</b></li>
-                        </ul>
-                    </div>
+    # --- CONSTRUCTION DU HTML ---
+    # On utilise une variable propre pour éviter les erreurs de syntaxe
+    html_card = """
+    <div class="pop-up-container">
+        <div class="card">
+            <div class="card-front">
+                <div class="card-front-cake">🎂</div>
+                <div class="card-front-title">Joyeux Anniversaire</div>
+            </div>
+            <div class="card-inside">
+                <div class="card-inside-note">JE T'AIME À LA FOLIE ❤️</div>
+                <div class="gift-pop-up">
+                    <h2 style="color: #ff4b4b; text-align: center; margin-bottom: 5px; font-size: 20px;">
+                        🎫 BON POUR UNE VIE DE PRIVILÈGES
+                    </h2>
+                    <p style="font-style: italic; font-size: 12px; text-align: center; color: #777;">
+                        Valable à n'importe quel instant.
+                    </p>
+                    <ul class="privilege-list">
+                        <li><b>Cunnilingus Royal</b> (30 min+)</li>
+                        <li><b>Massage Intégral</b> (20 min)</li>
+                        <li><b>Pack 10 Bisous</b></li>
+                        <li><b>Séance Papouilles</b> (mode dodo)</li>
+                        <li><b>Soirée "C'est toi la chef"</b></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    """, unsafe_allow_html=True)
+    </div>
 
-    st.write("") # Espace
-    # On peut garder la photo d'un bisou en dessous, c'est sympa
+    <style>
+    .pop-up-container {
+        perspective: 2000px;
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        height: 550px;
+    }
+    .card {
+        width: 450px;
+        height: 320px;
+        position: relative;
+        transform-style: preserve-3d;
+        animation: openRealisticCard 3s forwards;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        border-radius: 10px;
+    }
+    @keyframes openRealisticCard {
+        0% { transform: rotateY(0deg); }
+        100% { transform: rotateY(-20deg) rotateX(10deg); }
+    }
+    .card-front {
+        position: absolute; width: 100%; height: 100%;
+        background-color: #d32f2f; border-radius: 10px;
+        backface-visibility: hidden; display: flex;
+        flex-direction: column; justify-content: center;
+        align-items: center; color: white; z-index: 2;
+    }
+    .card-front-cake { font-size: 50px; }
+    .card-front-title { font-size: 25px; font-weight: bold; text-transform: uppercase; }
+    
+    .card-inside {
+        position: absolute; width: 100%; height: 100%;
+        background-color: #fff8e1; border-radius: 10px;
+        backface-visibility: hidden; transform: rotateY(180deg);
+        padding: 20px; z-index: 1;
+    }
+    .gift-pop-up {
+        background-color: white; border: 2px solid #ffb1c1;
+        border-radius: 10px; padding: 15px;
+        position: absolute; top: 30px; left: 30px; right: 30px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        transform-origin: bottom center;
+        animation: popUpEffect 1s forwards;
+        animation-delay: 2s; opacity: 0;
+    }
+    @keyframes popUpEffect {
+        0% { transform: scaleY(0); opacity: 0; }
+        100% { transform: scaleY(1); opacity: 1; }
+    }
+    .privilege-list {
+        font-size: 14px; text-align: left;
+        list-style-type: '💖 '; color: #d32f2f;
+    }
+    .card-inside-note {
+        background-color: white; border: 1px solid #ddd;
+        height: 60px; position: absolute; bottom: 15px;
+        left: 15px; right: 15px; border-radius: 5px;
+        display: flex; justify-content: center; align-items: center;
+        font-weight: bold; font-size: 18px; color: #ff4b4b;
+    }
+    </style>
+    """
+
+    # --- AFFICHAGE ---
+    st.markdown(html_card, unsafe_allow_html=True)
+
+    st.write("") 
     st.image("image/photo3.jpg", caption="Ton cadeau final, c'est nous.")
 
     if st.button("Recommencer le quiz"):
-        # On réinitialise tout, même la musique
-        for key in st.session_state.keys():
-            del st.session_state[key]
+        st.session_state.etape = 1
         st.rerun()
