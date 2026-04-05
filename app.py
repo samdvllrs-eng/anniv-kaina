@@ -43,6 +43,17 @@ def set_background(png_file):
     ''' % bin_str
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
+def play_audio(file_path):
+    with open(file_path, "rb") as f:
+        data = f.read()
+        b64 = base64.b64encode(data).decode()
+        md = f"""
+            <audio autoplay="true" loop="true">
+            <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+            </audio>
+            """
+        st.markdown(md, unsafe_allow_html=True)
+
 # 1. Configuration
 st.set_page_config(page_title="Joyeux Anniversaire Kaina ! 🎂", page_icon="💖", layout="centered")
 
@@ -68,7 +79,7 @@ st.markdown("""
 
 # 5. Section Message Personnel
 st.header("✨ Mon petit mot pour toi mon bb d'amour")
-st.write("Kakoukakou ! J'ai voulu faire quelque chose d'un peu spécial pour tes 20 ans. Ce site n'existe que sur mon ordinateur, juste pour te dire à quel point tu comptes pour moi. Merci d'être la personne incroyable que tu es au quotidien !")
+st.write("Kakoukakou ! J'ai voulu faire quelque chose d'un peu spécial pour tes 19 ans. Ce site n'existe que sur mon ordinateur, juste pour te dire à quel point tu comptes pour moi. Merci d'être la personne incroyable que tu es au quotidien !")
 
 # 6. Section Galerie Photo
 st.header("📸 Nos meilleurs moments")
@@ -192,25 +203,84 @@ elif st.session_state.etape == 3:
 elif st.session_state.etape == 4:
     st.balloons()
     st.snow()
+
+    # --- LANCEMENT DE LA MUSIQUE ---
+    # Assure-toi d'avoir un fichier "musique.mp3" dans ton dossier
+    try:
+        play_audio("image/musique.mp3")
+    except:
+        pass # Évite de crash si le fichier n'est pas trouvé
+
     st.success("🌟 FÉLICITATIONS MON BB ! TU AS GAGNÉ ! 🌟")
 
+    # --- CSS POUR L'ANIMATION DE LA CARTE ---
     st.markdown("""
-        <div class="gift-card">
-            <h2 style="text-align: center; color: #ff4b4b;">🎫 BON POUR UNE VIE DE PRIVILÈGES</h2>
-            <p style="text-align: center; font-style: italic;">Valable à n'importe quel instant, sans date d'expiration.</p>
-            <hr>
-            <p>Mon bb, en réussissant ce test, tu débloques l'accès illimité à mes services. Tu peux me réclamer ces choses quand tu veux :</p>
-            <ul style="font-size: 18px; line-height: 1.6;">
-                <li>😋 <b>Je te dévore la chatte pendant 30 minutes</b> (ou plus ...)</li>
-                <li>💆 <b>Un massage intégral de 20 minutes</b> par moi.</li>
-                <li>💋 <b>Un pack de 10 bisous</b> tendres (ou sauvages grrr) à utiliser de suite.</li>
-                <li>☁️ <b>Une séance de papouilles de 15 minutes</b> pour t'endormir comme un gros bb.</li>
-                <li>✨ <b>Une soirée où je te fais ce que tu veux </b> (tu peux décider que je fasse ce que je veux de toi aussi.)</li>
-            </ul>
-            <p style="text-align: center; font-weight: bold; margin-top: 20px;">JE T'AIME À LA FOLIE ❤️</p>
+        <style>
+        .card-container {
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .card {
+            width: 350px;
+            height: 500px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: openCard 2.5s forwards; /* Animation d'ouverture auto */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-radius: 15px;
+        }
+
+        @keyframes openCard {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(-10deg); } /* Légère inclinaison pour l'effet 3D */
+        }
+
+        .gift-card {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffd1dc 100%);
+            padding: 30px;
+            border-radius: 20px;
+            border: 3px dashed #ff4b4b;
+            color: #333;
+            text-align: center;
+            backface-visibility: hidden;
+            border: 5px solid white;
+        }
+
+        /* Animation de flottement pour rendre ça vivant */
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        </style>
+
+        <div class="card-container">
+            <div class="card floating">
+                <div class="gift-card">
+                    <h2 style="color: #ff4b4b;">🎫 BON POUR UNE VIE DE PRIVILÈGES</h2>
+                    <p style="font-style: italic; font-size: 14px;">Valable à n'importe quel instant, sans date d'expiration.</p>
+                    <hr style="border: 1px solid #ffb1c1;">
+                    <p style="font-size: 16px; text-align: left;">Mon bb, tu débloques l'accès illimité :</p>
+                    <ul style="font-size: 15px; line-height: 1.4; text-align: left; list-style-type: '💖 ';">
+                        <li><b>Cunnilingus Royal</b> (30 min+)</li>
+                        <li><b>Massage Intégral</b> (20 min)</li>
+                        <li><b>Pack 10 Bisous</b> (au choix)</li>
+                        <li><b>Séance Papouilles</b> (mode dodo)</li>
+                        <li><b>Soirée "C'est toi la chef"</b></li>
+                    </ul>
+                    <p style="font-weight: bold; margin-top: 20px; font-size: 20px;">JE T'AIME À LA FOLIE ❤️</p>
+                </div>
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
+    st.write("") # Espace
     st.image("image/photo3.jpg", caption="Ton cadeau final, c'est nous.")
 
     if st.button("Recommencer le quiz"):
