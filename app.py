@@ -201,21 +201,20 @@ elif st.session_state.etape == 3:
         st.rerun()
 
 # --- LE FINAL (ÉTAPE 4) ---
-# --- LE FINAL (ÉTAPE 4) ---
 elif st.session_state.etape == 4:
     st.balloons()
     st.snow()
 
     # --- MUSIQUE ---
     try:
+        # Assure-toi d'avoir un fichier "musique.mp3" dans ton dossier "image"
         play_audio("image/musique.mp3") 
     except:
         pass 
 
     st.success("🌟 FÉLICITATIONS MON BB ! TU AS GAGNÉ ! 🌟")
 
-    # --- CONSTRUCTION DU HTML ---
-    # On utilise une variable propre pour éviter les erreurs de syntaxe
+    # --- CONSTRUCTION DU HTML ET CSS CORRIGÉ ---
     html_card = """
     <div class="pop-up-container">
         <div class="card">
@@ -223,13 +222,15 @@ elif st.session_state.etape == 4:
                 <div class="card-front-cake">🎂</div>
                 <div class="card-front-title">Joyeux Anniversaire</div>
             </div>
+            
             <div class="card-inside">
                 <div class="card-inside-note">JE T'AIME À LA FOLIE ❤️</div>
+                
                 <div class="gift-pop-up">
-                    <h2 style="color: #ff4b4b; text-align: center; margin-bottom: 5px; font-size: 20px;">
+                    <h2 style="color: #ff4b4b; text-align: center; margin-bottom: 2px; font-size: 18px;">
                         🎫 BON POUR UNE VIE DE PRIVILÈGES
                     </h2>
-                    <p style="font-style: italic; font-size: 12px; text-align: center; color: #777;">
+                    <p style="font-style: italic; font-size: 11px; text-align: center; color: #777;">
                         Valable à n'importe quel instant.
                     </p>
                     <ul class="privilege-list">
@@ -252,19 +253,24 @@ elif st.session_state.etape == 4:
         margin-top: 50px;
         height: 550px;
     }
+    
     .card {
         width: 450px;
         height: 320px;
         position: relative;
         transform-style: preserve-3d;
-        animation: openRealisticCard 3s forwards;
+        /* Animation ralentie à 5 secondes pour un effet doux */
+        animation: openRealisticCard 5s forwards;
         box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         border-radius: 10px;
     }
+    
+    /* Animation corrigée pour s'arrêter à un angle lisible (-10deg) */
     @keyframes openRealisticCard {
-        0% { transform: rotateY(0deg); }
-        100% { transform: rotateY(-20deg) rotateX(10deg); }
+        0% { transform: rotateY(0deg) rotateX(0deg); }
+        100% { transform: rotateY(-10deg) rotateX(5deg); }
     }
+    
     .card-front {
         position: absolute; width: 100%; height: 100%;
         background-color: #d32f2f; border-radius: 10px;
@@ -281,23 +287,31 @@ elif st.session_state.etape == 4:
         backface-visibility: hidden; transform: rotateY(180deg);
         padding: 20px; z-index: 1;
     }
+    
     .gift-pop-up {
         background-color: white; border: 2px solid #ffb1c1;
-        border-radius: 10px; padding: 15px;
-        position: absolute; top: 30px; left: 30px; right: 30px;
+        border-radius: 10px; padding: 10px; /* Padding réduit */
+        position: absolute; top: 20px; left: 15px; right: 15px; /* Ajusté */
         box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         transform-origin: bottom center;
         animation: popUpEffect 1s forwards;
-        animation-delay: 2s; opacity: 0;
+        animation-delay: 3s; /* Délai pour que la carte soit presque ouverte */
+        opacity: 0;
     }
+    
     @keyframes popUpEffect {
         0% { transform: scaleY(0); opacity: 0; }
         100% { transform: scaleY(1); opacity: 1; }
     }
+    
+    /* Taille du texte réduite pour tenir dans l'espace */
     .privilege-list {
-        font-size: 14px; text-align: left;
+        font-size: 13px; /* <--- TEXTE AJUSTÉ */
+        line-height: 1.3;
+        text-align: left;
         list-style-type: '💖 '; color: #d32f2f;
     }
+    
     .card-inside-note {
         background-color: white; border: 1px solid #ddd;
         height: 60px; position: absolute; bottom: 15px;
