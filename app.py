@@ -47,13 +47,14 @@ def play_audio(file_path):
     with open(file_path, "rb") as f:
         data = f.read()
         b64 = base64.b64encode(data).decode()
+        # On ajoute un ID unique basé sur le temps pour forcer le navigateur à lire
+        unique_id = int(time.time()) 
         md = f"""
-            <audio autoplay="true" loop="true">
-            <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+            <audio autoplay="autoplay" id="player_{unique_id}" style="display:none;">
+                <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
             </audio>
             """
         st.markdown(md, unsafe_allow_html=True)
-
 # 1. Configuration
 st.set_page_config(page_title="Joyeux Anniversaire Kaina ! 🎂", page_icon="💖", layout="centered")
 
