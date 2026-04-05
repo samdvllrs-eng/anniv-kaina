@@ -79,7 +79,7 @@ st.markdown("""
 
 # 5. Section Message Personnel
 st.header("✨ Mon petit mot pour toi mon bb d'amour")
-st.write("Kakoukakou ! J'ai voulu faire quelque chose d'un peu spécial pour tes 19 ans. Ce site n'existe que sur mon ordinateur, juste pour te dire à quel point tu comptes pour moi. Merci d'être la personne incroyable que tu es au quotidien !")
+st.write("Kakoukakou ! J'ai voulu faire quelque chose d'un peu spécial pour tes 20 ans. Ce site n'existe que sur mon ordinateur, juste pour te dire à quel point tu comptes pour moi. Merci d'être la personne incroyable que tu es au quotidien !")
 
 # 6. Section Galerie Photo
 st.header("📸 Nos meilleurs moments")
