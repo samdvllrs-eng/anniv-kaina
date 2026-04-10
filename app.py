@@ -201,11 +201,11 @@ elif st.session_state.etape == 4:
             <hr>
             <p>Mon bb, en réussissant ce test, tu débloques l'accès illimité à mes services. Tu peux me réclamer ces choses quand tu veux :</p>
             <ul style="font-size: 18px; line-height: 1.6;">
-                <li>😋 <b>Je te dévore la chatte pendant 30 minutes</b> (ou plus ...)</li>
+                <li>😋 <b>Le bon "Colis Surprise" : Je te prépares une petite boîte avec des bêtises que tu aimes et je te l'envoie par la poste.</li>
                 <li>💆 <b>Un massage intégral de 20 minutes</b> par moi.</li>
-                <li>💋 <b>Un pack de 10 bisous</b> tendres (ou sauvages grrr) à utiliser de suite.</li>
-                <li>☁️ <b>Une séance de papouilles de 15 minutes</b> pour t'endormir comme un gros bb.</li>
-                <li>✨ <b>Une soirée où je te fais ce que tu veux </b> (tu peux décider que je fasse ce que je veux de toi aussi.)</li>
+                <li>💋 <b> Le bon pour un "Date Mystère" : Je gères l'organisation de A à Z (lieu, horaire, activité) et tu te laisse porter.</li>
+                <li>☁️ <b> Le bon "Petit-déjeuner: je lui apporte le petit déj avant qu'elle aille au bouloW.</li>
+                <li>✨ <b>Le bon "Droit de choisir ma tenue" : Elle peut choisir tes vêtements pour votre prochaine sortie.</li>
             </ul>
             <p style="text-align: center; font-weight: bold; margin-top: 20px;">JE T'AIME À LA FOLIE ❤️</p>
         </div>
