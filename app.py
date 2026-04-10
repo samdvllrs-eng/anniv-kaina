@@ -76,13 +76,13 @@ st.header("📸 Nos meilleurs moments")
 # On définit la liste complète : tes 2 photos de départ + tes 7 nouvelles images
 liste_photos = [
     ("photo1.jpg", "Là où tout a commencé"),
-    ("photo2.jpg", "Toi et moi, pour toujours"),
-    ("image1.jpg", "Un moment précieux"),
-    ("image2.jpg", "Ton plus beau sourire"),
-    ("image3.jpg", "Ce jour-là était magique"),
-    ("image4.jpg", "Ma préférée de nous"),
+    ("photo2.jpg", "Les premières photos dans la tintinnnee"),
+    ("image1.jpg", "encore la "),
+    ("image2.jpg", "Toujours dans la tintine"),
+    ("image3.jpg", "Petit bisous sur mes joues préférées"),
+    ("image4.jpg", "Petites séance photomaton"),
     ("image5.jpg", "Juste parce que je t'aime"),
-    ("image6.jpg", "Complices pour la vie"),
+    ("image6.jpg", "Les révisions c'est harrr"),
     ("image7.jpg", "Mon bonheur, c'est toi")
 ]
 
