@@ -72,11 +72,48 @@ st.write("Kakoukakou ! J'ai voulu faire quelque chose d'un peu spécial pour tes
 
 # 6. Section Galerie Photo
 st.header("📸 Nos meilleurs moments")
-col_a, col_b = st.columns(2)
-with col_a:
-    st.image("image/photo1.jpg", caption="Là où tout a commencé")
-with col_b:
-    st.image("image/photo2.jpg", caption="Toi et moi, pour toujours")
+
+# On définit la liste complète : tes 2 photos de départ + tes 7 nouvelles images
+liste_photos = [
+    ("photo1.jpg", "Là où tout a commencé"),
+    ("photo2.jpg", "Toi et moi, pour toujours"),
+    ("image1.jpg", "Un moment précieux"),
+    ("image2.jpg", "Ton plus beau sourire"),
+    ("image3.jpg", "Ce jour-là était magique"),
+    ("image4.jpg", "Ma préférée de nous"),
+    ("image5.jpg", "Juste parce que je t'aime"),
+    ("image6.jpg", "Complices pour la vie"),
+    ("image7.jpg", "Mon bonheur, c'est toi")
+]
+
+# Affichage automatique
+for i in range(0, len(liste_photos), 2):
+    # Si c'est la dernière photo (la 9ème), elle s'affiche seule au milieu
+    if i + 1 == len(liste_photos):
+        nom_fichier, legende = liste_photos[i]
+        try:
+            st.image(f"image/{nom_fichier}", caption=legende, use_container_width=True)
+        except:
+            st.write(f"📷 {nom_fichier} manquante")
+    else:
+        # Sinon, on crée 2 colonnes pour les afficher par paires
+        cols = st.columns(2)
+        
+        # Photo de gauche
+        with cols[0]:
+            nom_fichier, legende = liste_photos[i]
+            try:
+                st.image(f"image/{nom_fichier}", caption=legende, use_container_width=True)
+            except:
+                st.write(f"📷 {nom_fichier} manquante")
+                
+        # Photo de droite
+        with cols[1]:
+            nom_fichier, legende = liste_photos[i+1]
+            try:
+                st.image(f"image/{nom_fichier}", caption=legende, use_container_width=True)
+            except:
+                st.write(f"📷 {nom_fichier} manquante")
 
 # 7. SECTION JEU
 st.header("🎁 Le Quiz de l'Amour")
